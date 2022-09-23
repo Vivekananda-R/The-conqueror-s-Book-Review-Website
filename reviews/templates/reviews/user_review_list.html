@@ -1,0 +1,40 @@
+{% extends 'reviews/review_list.html' %}
+
+{% block title %}
+User_review
+{% endblock %}
+{% block content %}
+<h2>Reviews by {{ user.username }}</h2>
+
+{% if latest_review_list %}
+<div>
+    {% for review in latest_review_list %}
+    <div>
+        <h4><a href="{% url 'reviews:review_detail' review.id %}">
+        {{ review.book.name }}
+        </a></h4>
+        <h5>{{ review.book.author }} </h5>
+        <h6>Rated <b>{{ review.rating }} of 5 </b> by <a href="{% url 'reviews:user_review_list' review.user_name %}" >{{ review.user_name }}</a></h6>
+        <p><i>{{ review.comment }}</i></p>
+    </div>
+
+
+    <!-- <div class="card " style="width: 18rem;">
+  <div class="card-body">
+    <a class="card-title" ref="{% url 'reviews:review_detail' review.id %}">
+    <b>{{ review.book.name }}</b>
+    </a>
+    <!-- <h5 class="card-title">{{ review.book.author }} </h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{ review.book.author }}</h6>
+    <h6 class="card-title">Rated {{ review.rating }} of 5</h6>
+    <a href="{% url 'reviews:user_review_list' review.user_name %}" class="card-link">{{ review.user_name }}</a>
+    <p class="card-text"><i>{{ review.comment }}</i></p> -->
+
+
+  {% endfor %}
+  </div>
+{% else %}
+<p>No reviews are available.</p>
+{% endif %}
+
+{% endblock %}

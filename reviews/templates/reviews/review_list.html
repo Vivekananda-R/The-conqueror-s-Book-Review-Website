@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Review_list{% endblock %}
+{% block content %}
+
+<h2>List of Reviews</h2>
+
+{% if latest_review_list %}
+<div>
+    {% for review in latest_review_list %}
+    <div>
+        <h4><a href="{% url 'reviews:review_detail' review.id %}">
+        {{ review.book.name }}
+        </a></h4>
+        <h5>{{ review.book.author }} </h5>
+        <h6>Rated <b>{{ review.rating }} of 5 </b> by <a href="{% url 'reviews:user_review_list' review.user_name %}" >{{ review.user_name }}</a></h6>
+        <p><i>{{ review.comment }}</i></p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No reviews are available.</p>
+{% endif %}
+
+{% endblock %}
